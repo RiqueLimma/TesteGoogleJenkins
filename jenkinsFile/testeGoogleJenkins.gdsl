@@ -1,22 +1,57 @@
 pipeline {
     agent any
 
+    environment {
+        // Defina o caminho do seu repositório
+        REPO_URL = 'https://github.com/seu-repositorio/DriverQA.git'
+    }
+
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/seu-repositorio/DriverQA.git'
+                // Faz o clone do repositório do GitHub
+                git branch: 'main', url: "${REPO_URL}"
             }
         }
-        stage('Build') {
+
+        stage('Install Dependencies') {
             steps {
-                sh 'mvn clean install' // Gera o build do projeto
+                // Instala as dependências usando Maven
+                sh 'mvn clean install -U'
             }
         }
-        stage('Run Tests') {
+
+        stage('Run Cucumber Tests') {
             steps {
-                // Executa os testes especificando o diretório ou a classe de teste se necessário
-                sh 'mvn test -Dtest=feature.pesquisaGoogle'
+                // Executa os testes do Cucumber
+                sh 'mvn test -Dcucumber.options="--plugin pretty --plugin html:target/cucumber-reports --features src/main/java/feature/pesquisaGoogle.feature"'
             }
+        }
+
+        stage('Publish Test Reports') {
+            steps {
+                // Publica o relatório HTML gerado
+                publishHTML(target: [
+                        reportName: 'Cucumber Report',
+                        reportDir: 'target/cucumber-reports',
+                        reportFiles: 'index.html',
+                        keepAll: true,
+                        allowMissing: false
+                ])
+            }
+        }
+    }
+
+    post {
+        always {
+            // Limpeza de qualquer coisa após o build (se necessário)
+            cleanWs()
+        }
+        success {
+            echo "Build e testes realizados com sucesso!"
+        }
+        failure {
+            echo "Build ou testes falharam!"
         }
     }
 }
