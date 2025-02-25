@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/seu-repositorio/DriverQA.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install' // Gera o build do projeto
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                // Executa os testes especificando o diretório ou a classe de teste se necessário
+                sh 'mvn test -Dtest=feature.pesquisaGoogle'
+            }
+        }
+    }
+}
