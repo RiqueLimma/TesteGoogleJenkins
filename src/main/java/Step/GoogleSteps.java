@@ -23,15 +23,18 @@ public class GoogleSteps {
     @Quando("eu digitar {string} na barra de pesquisa")
     public void digitarNaBarraDePesquisa(String termo) {
         googlePage.digitarPesquisa(termo);
+        System.out.println("Digitou na barra de pesquisa");
     }
 
     @Quando("clicar no botão de busca")
     public void clicarNoBotaoDeBusca() {
         googlePage.clicarPesquisar();
+        System.out.println("Clicando no botão pesquisa");
     }
 
     @Entao("os resultados da pesquisa devem ser exibidos")
     public void verificarResultadosPesquisa() {
+        System.out.println("Validando a pagina");
         Assert.assertTrue(driver.getTitle().contains("carros"));
         driver.quit();
     }
