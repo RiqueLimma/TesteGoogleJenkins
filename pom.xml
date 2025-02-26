@@ -113,7 +113,7 @@
                             <systemProperties>
                                 <property>
                                     <name>cucumber.options</name>
-                                    <value>--plugin pretty --plugin html:target/cucumber-reports --features src/main/resources/feature/pesquisaGoogle.feature</value>
+                                    <value>--plugin pretty --plugin html:target/cucumber-reports --features src/test/java/feature/pesquisaGoogle.feature</value>
                                 </property>
                             </systemProperties>
                         </configuration>
