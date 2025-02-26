@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/seu-repositorio/DriverQA.git'
+        REPO_URL = 'https://github.com/RiqueLimma/TesteGoogleJenkins.git'
     }
 
     stages {
