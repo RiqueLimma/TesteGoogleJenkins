@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import utils.ScreenshotUtils;
 
 public class GoogleSteps {
     private WebDriver driver;
@@ -21,27 +22,40 @@ public class GoogleSteps {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
 
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         googlePage = new GooglePage(driver);
         googlePage.abrirGoogle();
+
+        // Tirar screenshot da página inicial
+        ScreenshotUtils.tirarScreenshot(driver, "pagina_inicial_google");
     }
 
     @Quando("eu digitar {string} na barra de pesquisa")
     public void digitarNaBarraDePesquisa(String termo) {
         googlePage.digitarPesquisa(termo);
         System.out.println("Digitou na barra de pesquisa");
+
+        // Tirar screenshot após digitar o termo
+        ScreenshotUtils.tirarScreenshot(driver, "termo_digitado_" + termo);
     }
 
     @Quando("clicar no botão de busca")
     public void clicarNoBotaoDeBusca() {
         googlePage.clicarPesquisar();
         System.out.println("Clicando no botão pesquisa");
+
+        // Tirar screenshot após clicar no botão
+        ScreenshotUtils.tirarScreenshot(driver, "botao_busca_clicado");
     }
 
     @Entao("os resultados da pesquisa devem ser exibidos")
     public void verificarResultadosPesquisa() {
         System.out.println("Validando a pagina");
         Assert.assertTrue(driver.getTitle().contains("carros"));
+
+        // Tirar screenshot dos resultados
+        ScreenshotUtils.tirarScreenshot(driver, "resultados_pesquisa");
+
         driver.quit();
     }
 }
