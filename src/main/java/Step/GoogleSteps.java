@@ -7,6 +7,7 @@ import io.cucumber.java.pt.Quando;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 public class GoogleSteps {
     private WebDriver driver;
@@ -15,6 +16,11 @@ public class GoogleSteps {
     @Dado("que estou na página inicial do Google")
     public void abrirPaginaGoogle() {
         System.setProperty("webdriver.chrome.driver", "src/main/java/driver/chromedriver.exe");
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Modo sem interface
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
         driver = new ChromeDriver();
         googlePage = new GooglePage(driver);
         googlePage.abrirGoogle();
