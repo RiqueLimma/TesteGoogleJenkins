@@ -2,50 +2,63 @@ pipeline {
     agent any
 
     environment {
-        REPO_URL = 'https://github.com/RiqueLimma/TesteGoogleJenkins.git'
+        // Definindo a versão do JDK (caso esteja utilizando um JDK específico, como JDK 17)
+        JAVA_HOME = tool name: 'JDK 17', type: 'Tool'
     }
 
     stages {
-        stage('Checkout') {
+        stage('Preparação') {
             steps {
-                git branch: 'main', url: "${REPO_URL}"
+                script {
+                    // Baixar o código do repositório (caso o Jenkins ainda não tenha feito isso)
+                    echo 'Baixando o código do repositório...'
+                    checkout scm
+                }
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Instalar Dependências') {
             steps {
-                sh 'mvn clean install -U'
+                script {
+                    // Se estiver usando Maven, instala as dependências
+                    echo 'Instalando dependências com Maven...'
+                    sh 'mvn clean install'
+                }
             }
         }
 
-        stage('Run Cucumber Tests') {
+        stage('Executar Testes') {
             steps {
-                sh 'mvn clean test -Dcucumber.options="--plugin pretty --plugin html:target/cucumber-reports --features src/main/java/feature/pesquisaGoogle.feature" -X'
+                script {
+                    // Executar os testes TestNG usando o arquivo src/main/resources/testng.xml
+                    echo 'Executando os testes com TestNG...'
+                    sh 'mvn test -DsuiteXmlFile=src/main/resources/testng.xml'
+                }
             }
         }
 
-        stage('Publish Test Reports') {
+        stage('Publicar Relatórios') {
             steps {
-                publishHTML(target: [
-                        reportName: 'Cucumber Report',
-                        reportDir: 'target/cucumber-reports',
-                        reportFiles: 'index.html',
-                        keepAll: true,
-                        allowMissing: false
-                ])
+                script {
+                    // Publicar os relatórios de testes gerados pelo TestNG
+                    echo 'Publicando relatórios de testes...'
+                    junit '**/target/test-*.xml'  // Caminho dos relatórios de teste gerados pelo Maven
+                }
             }
         }
     }
 
     post {
         always {
-            cleanWs()
+            echo 'Pipeline finalizado.'
         }
+
         success {
-            echo "Build e testes realizados com sucesso!"
+            echo 'Pipeline concluído com sucesso.'
         }
+
         failure {
-            echo "Build ou testes falharam!"
+            echo 'Pipeline falhou. Verifique os logs para mais detalhes.'
         }
     }
 }

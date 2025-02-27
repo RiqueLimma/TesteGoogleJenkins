@@ -49,7 +49,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
+            <version>5.9.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -91,34 +91,26 @@
             <artifactId>commons-io</artifactId>
             <version>2.11.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.9.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
     <!-- Plugin do Surefire para rodar os testes -->
     <build>
         <plugins>
-            <!-- Plugin do Maven Surefire para rodar os testes -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <includes>
-                                <include>**/*Test.java</include> <!-- Inclui todos os testes -->
-                            </includes>
-                            <systemProperties>
-                                <property>
-                                    <name>cucumber.options</name>
-                                    <value>--plugin pretty --plugin html:target/cucumber-reports --features src/test/java/feature/pesquisaGoogle.feature</value>
-                                </property>
-                            </systemProperties>
-                        </configuration>
-                    </execution>
-                </executions>
+                <version>3.0.0-M7</version>
+                <configuration>
+                    <includes>
+                        <include>src/main/java/Test/GoogleTeste.java</include>
+                    </includes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
