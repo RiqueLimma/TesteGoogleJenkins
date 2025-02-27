@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Suite de Testes do Google" verbose="1">
+    <test name="Teste Google Busca">
+        <classes>
+            <class name="GoogleTeste">
+                <methods>
+                    <include name="digitarEBusca"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
