@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         // Definindo o caminho absoluto do JDK 17 no Jenkins
-        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"  // Ajuste para o caminho correto onde o JDK 17 está instalado no Jenkins
+        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
+        // Ajuste para o caminho correto onde o JDK 17 está instalado no Jenkins
         PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
@@ -46,20 +47,6 @@ pipeline {
                     junit '**/target/test-*.xml'  // Caminho dos relatórios de teste gerados pelo Maven
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline finalizado.'
-        }
-
-        success {
-            echo 'Pipeline concluído com sucesso.'
-        }
-
-        failure {
-            echo 'Pipeline falhou. Verifique os logs para mais detalhes.'
         }
     }
 }
