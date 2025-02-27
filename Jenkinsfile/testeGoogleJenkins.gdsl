@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        // Definindo a versão do JDK, utilizando a configuração de ferramenta no Jenkins
-        JAVA_HOME = tool name: 'JDK 17', type: 'Tool'  // Certifique-se de que a ferramenta JDK 17 está configurada no Jenkins
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"  // Inclui o JDK no PATH
+        // Definindo o caminho absoluto do JDK 17 no Jenkins
+        JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"  // Ajuste para o caminho correto onde o JDK 17 está instalado no Jenkins
+        PATH = "${JAVA_HOME}/bin:${env.PATH}"
     }
 
     stages {
