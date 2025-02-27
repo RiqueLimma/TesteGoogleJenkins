@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Definindo a versão do JDK (caso esteja utilizando um JDK específico, como JDK 17)
-        JAVA_HOME = tool name: 'JDK 17', type: 'Tool'
+        JAVA_HOME = tool name: 'JDK 11', type: 'Tool'
     }
 
     stages {
