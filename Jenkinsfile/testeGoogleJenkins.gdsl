@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         JAVA_HOME = "C:\\Program Files\\Java\\jdk-17"
-        PATH = "${JAVA_HOME}/bin:${env.PATH}"
+        MAVEN_HOME = "C:\\apache-maven-3.9.9"
+        PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${env.PATH}"
     }
 
     stages {
@@ -15,11 +16,13 @@ pipeline {
                 }
             }
         }
+
         stage('Verify Maven') {
             steps {
                 bat 'mvn -v'
             }
         }
+
         stage('Instalar Dependências') {
             steps {
                 script {
@@ -33,7 +36,7 @@ pipeline {
             steps {
                 script {
                     echo 'Executando os testes com TestNG...'
-                    bat 'mvn test -DsuiteXmlFile=src/main/resources/testng.xml'
+                    bat 'mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng.xml'
                 }
             }
         }
@@ -42,7 +45,7 @@ pipeline {
             steps {
                 script {
                     echo 'Publicando relatórios de testes...'
-                    junit '**/target/test-*.xml'
+                    junit '**/target/surefire-reports/*.xml'
                 }
             }
         }
