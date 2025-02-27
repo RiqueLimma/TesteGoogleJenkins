@@ -15,7 +15,11 @@ pipeline {
                 }
             }
         }
-
+        stage('Verify Maven') {
+            steps {
+                bat 'mvn -v'
+            }
+        }
         stage('Instalar Dependências') {
             steps {
                 script {
