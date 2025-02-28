@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-02-28T09:58:07 BRT" name="Suite de Testes do Google" finished-at="2025-02-28T09:58:13 BRT" duration-ms="6539">
+    <groups>
+    </groups>
+    <test started-at="2025-02-28T09:58:07 BRT" name="Teste Google Busca" finished-at="2025-02-28T09:58:13 BRT" duration-ms="6539">
+      <class name="GoogleTest">
+        <test-method signature="digitarEBusca()[pri:0, instance:GoogleTest@67a20f67]" started-at="2025-02-28T09:58:07 BRT" name="digitarEBusca" finished-at="2025-02-28T09:58:13 BRT" duration-ms="6507" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- digitarEBusca -->
+      </class> <!-- GoogleTest -->
+    </test> <!-- Teste Google Busca -->
+  </suite> <!-- Suite de Testes do Google -->
+</testng-results>

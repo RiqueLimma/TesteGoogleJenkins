@@ -18,7 +18,7 @@ public class GoogleSteps {
     public GoogleSteps abrirPaginaGoogle() {
         System.setProperty("webdriver.chrome.driver", "src/main/java/driver/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); // Modo sem interface
+        //options.addArguments("--headless"); // Modo sem interface
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
 

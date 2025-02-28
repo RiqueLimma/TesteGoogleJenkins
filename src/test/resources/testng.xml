@@ -2,7 +2,7 @@
 <suite name="Suite de Testes do Google" verbose="1">
     <test name="Teste Google Busca">
         <classes>
-            <class name="GoogleTeste">
+            <class name="GoogleTest">
                 <methods>
                     <include name="digitarEBusca"/>
                 </methods>

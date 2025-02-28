@@ -1,9 +1,7 @@
-
-
 import Step.GoogleSteps;
 import org.testng.annotations.Test;
 
-public class GoogleTeste {
+public class GoogleTest {
 
     @Test
     public void digitarEBusca() {
